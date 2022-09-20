@@ -14,19 +14,21 @@ public class Application {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");}
         catch (Exception ex) {};
 
-        Model empleadosModel= new Model();
-        View empleadosView = new View();
-        empleadosController = new Controller(empleadosView,empleadosModel);
-
-        sucursales.presentation.empleado.Model empleadoModel= new sucursales.presentation.empleado.Model();
-        sucursales.presentation.empleado.View empleadoView = new sucursales.presentation.empleado.View();
-        empleadoController = new sucursales.presentation.empleado.Controller(empleadoView,empleadoModel);
-
+//empleados
+        sucursales.presentation.empleados.Model empleadosModel= new sucursales.presentation.empleados.Model();
+        sucursales.presentation.empleados.View empleadosView = new sucursales.presentation.empleados.View();
+        empleadosController = new sucursales.presentation.empleados.Controller(empleadosView,empleadosModel);
+//sucursales
+        sucursales.presentation.sucursales.Model sucursalesModel= new sucursales.presentation.sucursales.Model();
+        sucursales.presentation.sucursales.View sucursalesView = new sucursales.presentation.sucursales.View();
+        sucursalesController = new sucursales.presentation.sucursales.Controller(sucursalesView,sucursalesModel);
+//main
         sucursales.presentation.main.Model mainModel= new sucursales.presentation.main.Model();
         sucursales.presentation.main.View mainView = new sucursales.presentation.main.View();
         mainController = new sucursales.presentation.main.Controller(mainView, mainModel);
 
         mainView.getPanel().add("Empleados",empleadosView.getPanel());
+        mainView.getPanel().add("Sucursales",sucursalesView.getPanel());
 
         window = new JFrame();
         window.setSize(400,300);
@@ -39,6 +41,7 @@ public class Application {
 
     public static Controller empleadosController;
     public static sucursales.presentation.empleado.Controller empleadoController;
+    public static sucursales.presentation.sucursales.Controller sucursalesController;
 
     public static sucursales.presentation.main.Controller mainController;
 

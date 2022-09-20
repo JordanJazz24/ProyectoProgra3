@@ -25,7 +25,7 @@ public class Controller {
     }
 
     public void preAgregar(){
-        Application.empleadoController.preAgregar();
+        Application.empleadosController.preAgregar();
     }
 
     public void editar(int row){
@@ -33,7 +33,7 @@ public class Controller {
         Empleado e=null;
         try {
             e= Service.instance().empleadoGet(cedula);
-            Application.empleadoController.editar(e);
+            Application.empleadosController.editar(row);
         } catch (Exception ex) {}
     }
 

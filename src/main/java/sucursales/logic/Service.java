@@ -1,7 +1,7 @@
 package sucursales.logic;
 
 import sucursales.data.Data;
-import sucursales.data.XmlPersister;
+//import sucursales.data.XmlPersister;
 
 import java.util.Comparator;
 import java.util.List;
@@ -20,13 +20,17 @@ public class Service {
     private Data data;
 
     private Service(){
-        //data = new Data();
-        try{
-            data= XmlPersister.instance().load();
-        }
-        catch(Exception e){
-            data =  new Data();
-        }
+        data = new Data();
+//        try{
+////            data= XmlPersister.instance().load();
+//        }
+//        catch(Exception e){
+//            data =  new Data();
+//        }
+    }
+
+    public List<Sucursal> sucursalesSearch(String codigo){
+        return data.getSucursales().stream().filter(e->e.getCodigo().contains(codigo)).collect(Collectors.toList());
     }
 
     public List<Empleado> empleadosSearch(String filtro){
@@ -67,7 +71,7 @@ public class Service {
 
     public void store(){
         try {
-            XmlPersister.instance().store(data);
+//            XmlPersister.instance().store(data);
         } catch (Exception e) {
             System.out.println(e);
         }
