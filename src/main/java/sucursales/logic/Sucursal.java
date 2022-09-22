@@ -11,6 +11,9 @@ public class Sucursal {
     Point xy;
 
 
+    public Sucursal() {
+    }
+
     public Sucursal(String codigo, String refencia, String direccion, double zonaje, Point xy) {
         this.codigo = codigo;
         this.refencia = refencia;

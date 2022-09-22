@@ -18,7 +18,7 @@ public class Model extends java.util.Observable{
         this.sucursales = sucursales;
     }
 
-    public List<Sucursal> getSucursals() {
+    public List<Sucursal> getSucursales() {
         return sucursales;
     }
 

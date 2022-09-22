@@ -1,8 +1,6 @@
 package sucursales.presentation.sucursales;
 
 import javax.swing.*;
-import javax.swing.table.TableColumnModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -17,14 +15,48 @@ public class View implements Observer {
     private JButton agregarFld;
     private JTable sucursalesFld;
     private JLabel nombreLbl;
+    private JLabel labelMap;
+    private JButton borrarFld;
+    private JButton reporteButton;
 
     public View() {
+        // setMapa();
         buscarFld.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.buscar(nombreFld.getText());
             }
         });
+        agregarFld.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                controller.preAgregar();
+            }
+        });
+        sucursalesFld.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int row = sucursalesFld.getSelectedRow();
+                    controller.editar(row);
+                }
+            }
+        });
+        borrarFld.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = sucursalesFld.getSelectedRow();
+                controller.borrar(row);
+            }
+        });
+    }
+    void setMapa() {
+
+        labelMap.setSize(100, 100);
+        ImageIcon icon = new ImageIcon("C:\\Users\\50683\\Desktop\\I CICLO 2022\\II CICLO 2022\\Programacion III\\icons\\mapa.png");
+        labelMap.setIcon(icon);
+
     }
 
     public JPanel getPanel() {
@@ -45,8 +77,8 @@ public class View implements Observer {
 
     @Override
     public void update(Observable updatedModel, Object parametros) {
-            int[] cols = {TableModel.CODIGO, TableModel.REFERENCIA,TableModel.DIRECCION,TableModel.ZONAJE};
-        sucursalesFld.setModel(new TableModel(cols, model.getSucursals()));
+        int[] cols = {TableModel.CODIGO, TableModel.REFERENCIA, TableModel.DIRECCION, TableModel.ZONAJE};
+        sucursalesFld.setModel(new TableModel(cols, model.getSucursales()));
         sucursalesFld.setRowHeight(30);
         this.panel.revalidate();
     }

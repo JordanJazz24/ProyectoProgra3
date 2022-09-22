@@ -29,10 +29,41 @@ public class Service {
 //        }
     }
 
+    //METODOS SUCURSALES
     public List<Sucursal> sucursalesSearch(String codigo){
         return data.getSucursales().stream().filter(e->e.getCodigo().contains(codigo)).collect(Collectors.toList());
     }
 
+    public Sucursal sucursalGet(String codigo) throws Exception{
+        Sucursal result = data.getSucursales().stream().filter(e->e.getCodigo().equals(codigo)).findFirst().orElse(null);
+        if (result!=null) return result;
+        else throw new Exception("Sucursal no existe");
+    }
+
+    public void sucursalAdd(Sucursal sucursal) throws Exception{
+        Sucursal result = data.getSucursales().stream().filter(e->e.getCodigo().equals(sucursal.getCodigo())).findFirst().orElse(null);
+        if (result==null) data.getSucursales().add(sucursal);
+        else throw new Exception("Sucursal ya existe");
+    }
+
+    public void sucursalDelete(Sucursal sucursal) throws Exception{
+        Sucursal result = data.getSucursales().stream().filter(e->e.getCodigo().equals(sucursal.getCodigo())).findFirst().orElse(null);
+        if (result!=null) data.getSucursales().remove(sucursal);
+        else throw new Exception("Sucursal no existe");
+    }
+
+    public void sucursalUpdate(Sucursal sucursal) throws Exception{
+        Sucursal result;
+        try{
+            result = this.sucursalGet(sucursal.codigo);
+            data.getSucursales().remove(result);
+            data.getSucursales().add(sucursal);
+        }catch (Exception e) {
+            throw new Exception("Sucursal no existe");
+        }
+    }
+
+    //METODOS EMPLEADOS
     public List<Empleado> empleadosSearch(String filtro){
         return data.getEmpleados().stream()
                 .filter(e->e.getNombre().contains(filtro))
